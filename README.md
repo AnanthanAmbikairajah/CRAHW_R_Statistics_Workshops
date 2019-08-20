@@ -9,3 +9,4 @@ Topic covered so far:
 * [Simple Linear Regression](https://github.com/AnanthanAmbikairajah/CRAHW_R_Statistics_Workshops/tree/master/4_Simple_Linear_Regression)
 * [Multiple Regression](https://github.com/AnanthanAmbikairajah/CRAHW_R_Statistics_Workshops/tree/master/5_Multiple_Regression)
 * [Principal Component Analysis](https://github.com/AnanthanAmbikairajah/CRAHW_R_Statistics_Workshops/tree/master/6_Principal_Component_Analysis)
+* [Introduction to Linux](https://github.com/AnanthanAmbikairajah/CRAHW_R_Statistics_Workshops/tree/master/7_Introduction_to_Linux)
