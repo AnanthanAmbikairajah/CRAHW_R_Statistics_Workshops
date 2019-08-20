@@ -1,0 +1,116 @@
+---
+title: "Worked Markdown Example"
+author: "E. Walsh"
+date: "14 March 2019"
+output: html_document
+---
+
+<script type="text/javascript" language="JavaScript"><!--
+function HideContent(d) {
+document.getElementById(d).style.display = "none";
+}
+function ShowContent(d) {
+document.getElementById(d).style.display = "block";
+}
+function ReverseDisplay(d) {
+if(document.getElementById(d).style.display == "none") { document.getElementById(d).style.display = "block"; }
+else { document.getElementById(d).style.display = "none"; }
+}
+//--></script>
+
+
+
+<!--Comment-->
+
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+
+*italics*
+**bold**
+~~strikethrough~~
+
+---
+
+> Quote
+
+[Link text](http://www.negaleg.com)
+
+
+"Show" and "hide" here demonstrate the section folding code.
+
+<a href="javascript:ShowContent('NAME')">Show </a>
+<a href="javascript:HideContent('NAME')"> (hide)</a>
+<div id="NAME" style="display:none;">
+
+```{r sensornet_analysis}
+
+# Remember when loading data, when you knit it considers the location of the markdown file the working directory.
+# Loading datasets will throw an error and prevent compilation if the file it refers to cannot be found.
+
+sensornet_dat<-read.csv("sensornet-01__16_1_2019.csv")     
+
+
+# Variable specification for in-text reporting
+average_temperature<-mean(sensornet_dat$temperature)
+
+temp_humid_lm<-lm(temperature ~ humidity, data=sensornet_dat)
+
+# Pull out the coefficients from the model. The second one will be the slope.
+temp_humid_lm_coefficients<-coef(temp_humid_lm)
+
+# Pull out the p values from the model. The second one will be the slope.
+temp_humid_lm_pvalues<-summary(temp_humid_lm)$coefficients[,4]
+
+# Is the association positive or negative? Test if the slope is above or below 0.
+
+if(temp_humid_lm_coefficients[2]<0){temp_humid_association_direction<-"negatively"} else
+                                   {temp_humid_association_direction<-"positively"} 
+
+# Addition:
+      # As Nic noted, a third possibility is if there is no slope at all...
+      if(temp_humid_lm_coefficients[2]==0){temp_humid_association_direction<-"not"} 
+
+
+# Is the association statistically significant?
+if(temp_humid_lm_pvalues[2]<0.05){temp_humid_association_significance<-"significantly"} else
+                                 {temp_humid_association_significance<-"not significantly"} 
+
+
+# Add in synonyms!
+if(temp_humid_lm_coefficients[2]<0){temp_humid_association_direction_words<-"lower"} else
+                                   {temp_humid_association_direction_words<-"higher"} 
+
+```
+
+
+
+<a href="javascript:HideContent('NAME')">Hide</a>
+</div>
+
+
+The mean temperature was `r average_temperature`.
+
+
+The mean temperature was `r round(average_temperature,2)`.
+
+
+Temperature was `r temp_humid_association_direction` associated with humidity.
+
+
+Temperature was `r temp_humid_association_significance`, `r temp_humid_association_direction` associated with humidity.
+
+
+Temperature was `r temp_humid_association_significance`, `r temp_humid_association_direction` associated with humidity. Starting from `r round(temp_humid_lm_coefficients[1],2)` degrees, each additional 1% humidity was associated with `r round(temp_humid_lm_coefficients[2],2)` degrees `r temp_humid_association_direction_words` temperature.
+
+
+
+``` {r stargazer, results='asis'}
+library(stargazer)
+
+stargazer(temp_humid_lm, type="html", star.cutoffs = c(0.05))
+
+```
+
+

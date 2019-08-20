@@ -1,0 +1,83 @@
+---
+title: "Markdown is the best"
+author: "Erin Walsh"
+date: "16 January 2019"
+output: html_document
+---
+
+This is my first Markdown document.
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+
+# Example chunk of code
+# E. Walsh
+# Last edited: 16/01/2019
+
+## Packages
+  library(psych) # psych_1.5.8 for descriptives
+
+## Data
+      
+  # Sensor data from house 10:25 PM to 8:02 AM 15/1/2019
+    # Timestamp is ISO8601 formatted, samples every ~ 5 minutes.
+    # Temperature is in Centigrade.
+    # Humidity is in %.
+      sensornet_dat<-read.csv("sensornet-01__16_1_2019.csv")     
+
+## Functions
+  # Takes two numbers, returns their sum multiplied by the first input.
+    another_simple_function<-function(number,anothernumber){added<-number + anothernumber
+                                                        multiplied<-added * number
+                                                        return(multiplied)}
+## Scripts
+  # Adds simple_function() and nested_function()
+    source("example_script_containing_functions.R")
+
+    
+## Analysis
+    
+    # Loop over temperature to perform some operation
+      temperature_transformed<-vector()
+      for(i in 1:nrow(sensornet_dat)){
+                      temperature_transformed[i]<-nested_function(2,sensornet_dat$temperature[i])}
+      
+      temperature_transformed
+    
+      describe(temperature_transformed)
+      
+      describe(sensornet_dat$temperature)
+      
+      mean_temp_before<-describe(sensornet_dat$temperature)$mean
+    
+      mean_temp_after<-describe(temperature_transformed)$mean
+      
+      mean_temp_before
+      
+      mean_temp_after
+      
+    
+      library(stargazer) # Normally this would go up the top but just putting it here for demonstration
+      
+      linear_model<-glm(humidity ~ temperature, data=sensornet_dat)
+      
+      summary(linear_model)
+      
+
+```
+
+
+
+One night (15th-16th January 2019) we measured the temperature and humidity in our house every five minutes or so, overnight. The average overnight temperature was `r round(mean_temp_before,2)` degrees.
+
+Then I brought the data into R and did some nefarious things with loops and functions.
+
+Now it appears the average overnight temperature was `r round(mean_temp_after,2)` degrees. Deadly.
+
+Fine, but what is the actual relationship between temperature and humidity? A table can help us find out.
+
+```{r echo=FALSE, results='asis'}
+      
+stargazer(linear_model, type="html")
+      
+      
+```
