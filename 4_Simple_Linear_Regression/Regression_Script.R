@@ -8,7 +8,7 @@
 # R Version: 3.3.3
 
 # 1. Set working directory and load packages ####
-setwd("~/Desktop/GitHub/CRAHW_R_Workshops/4_Simple_Linear_Regression/")
+setwd("~/Desktop/GitHub/CRAHW_R_Statistics_Workshops/4_Simple_Linear_Regression/")
 
 packages <- c("car", "ggplot2")
 for (i in 1:length(packages)){
