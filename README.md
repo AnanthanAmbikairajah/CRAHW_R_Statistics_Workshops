@@ -12,3 +12,5 @@ Topic covered so far:
 * [Introduction to Linux](https://github.com/AnanthanAmbikairajah/CRAHW_R_Statistics_Workshops/tree/master/7_Introduction_to_Linux)
 
 Note: The next 6 months of classes (i.e. 26th of August, 2019 - 26th of February, 2020) will be run using [**DataCamp for the Classroom**](https://www.datacamp.com/groups/education)
+
+TEST
