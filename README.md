@@ -17,4 +17,4 @@ Two [**DataCamp for the Classroom**](https://www.datacamp.com/groups/education) 
 
 * 6 months of classes (i.e. 26th of August, 2019 - 26th of February, 2020) 
 
-* 6 months of classes (i.e. 25th of February, 20202 - 25th of August, 2020)
+* 6 months of classes (i.e. 25th of February, 2020 - 25th of August, 2020)
